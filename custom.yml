@@ -1,0 +1,15 @@
+locale: en_US.UTF-8
+timezone: Africa/Johannesburg
+deploy_application: true
+docker_dir: "/tmp/docker"
+docker_network: docknet
+username: snake
+enable_username_creation: yes
+user_shell: /bin/bash
+enable_passwordless_sudo: yes
+enable_ssh_keygen: true
+user_password: password123
+docker_image: ruanbekker/flask-demo-app
+docker_tag: ansible
+app_title: Welcome
+app_env: Production

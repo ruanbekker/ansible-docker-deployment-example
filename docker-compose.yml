@@ -1,0 +1,8 @@
+version: "3.8"
+
+services:
+  flask-application:
+    container_name: flask-application
+    build: .
+    ports:
+      - 5000:5000

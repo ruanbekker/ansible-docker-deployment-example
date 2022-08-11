@@ -1,0 +1,17 @@
+---
+- name: Delete the env file
+  file:
+    path: "{{ docker_dir }}/flask-application/.env"
+    state: absent
+
+- name: Make sure the FlaskApplication container is removed
+  docker_container:
+    name: "flask-application"
+    state: absent
+
+- name: Delete the docker network
+  docker_network:
+    name: "{{ docker_network }}"
+    state: absent
+    force: yes
+

@@ -1,0 +1,14 @@
+#!/usr/bin/env ansible-playbook
+
+- hosts: all
+  become: false
+
+  vars_files:
+    - custom.yml
+
+  roles:
+    - role: undeploy
+      when: deploy_application is defined
+      tags:
+        - docker-flask-app
+

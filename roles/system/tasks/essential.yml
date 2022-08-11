@@ -1,0 +1,19 @@
+- name: Generate the locale
+  locale_gen:
+    name: "{{ locale }}"
+    state: present
+
+- name: Update and upgrade apt packages
+  apt:
+    upgrade: yes
+    autoremove: yes
+    update_cache: yes
+
+- name: Install packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - tcpdump
+    - htop
+

@@ -1,0 +1,30 @@
+---
+- name: Create the folders
+  file:
+    path: "{{ docker_dir }}/flask-application/data"
+    recurse: yes
+
+- name: Copy the env file
+  template:
+    src: env.j2
+    dest: "{{ docker_dir }}/flask-application/.env"
+  # notify: restart flask-application
+
+- name: Create the docker network
+  docker_network:
+    name: "{{ docker_network }}"
+
+- name: Make sure the FlaskApplication container is created and running
+  docker_container:
+    name: "flask-application"
+    image: "{{ docker_image }}:{{ docker_tag }}"
+    networks:
+      - name: "{{ docker_network }}"
+    pull: yes
+    state: "started"
+    env_file: "{{ docker_dir }}/flask-application/.env"
+    ports:
+      - "5000:5000"
+    volumes:
+      - "{{ docker_dir }}/flask-application/data:/data"
+    restart_policy: unless-stopped

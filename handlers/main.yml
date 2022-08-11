@@ -1,0 +1,5 @@
+---
+- name: restart flask-application
+  docker_container:
+    name: flask-application
+    restart: yes
